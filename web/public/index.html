@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShieldMyRepo — Scan Any GitHub Repo for Security Issues</title>
+    <meta name="description" content="Scan any GitHub repository for security vulnerabilities, leaked secrets, and misconfigurations. Get a security grade from A to F in 30 seconds.">
+    <meta name="keywords" content="GitHub security scanner, repo scanner, secret detection, vulnerability scanner, DevSecOps">
+    <meta property="og:title" content="ShieldMyRepo — Security Scanner for GitHub Repos">
+    <meta property="og:description" content="Scan any GitHub repo for security nightmares in 30 seconds. Get a grade from A to F.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Nav -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="nav-logo">🛡️ ShieldMyRepo</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#scanners">Scanners</a>
+                <a href="https://github.com/DhanushNehru/ShieldMyRepo" target="_blank" class="nav-github">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                    Star on GitHub
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-glow"></div>
+        <div class="hero-content">
+            <div class="hero-badge">🔒 Open Source Security Tool</div>
+            <h1 class="hero-title">
+                Scan any GitHub repo for<br>
+                <span class="gradient-text">security nightmares</span><br>
+                in 30 seconds.
+            </h1>
+            <p class="hero-subtitle">
+                Detect leaked secrets, vulnerable dependencies, misconfigured workflows, and insecure Dockerfiles. 
+                Get a security grade from <span class="grade grade-a">A</span> to <span class="grade grade-f">F</span> instantly.
+            </p>
+
+            <!-- Scanner Input -->
+            <div class="scanner-box" id="scanner">
+                <div class="scanner-input-wrapper">
+                    <svg class="scanner-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                    <input 
+                        type="text" 
+                        id="repo-input" 
+                        class="scanner-input" 
+                        placeholder="Enter GitHub repo URL (e.g. https://github.com/user/repo)"
+                        autocomplete="off"
+                    >
+                    <button id="scan-btn" class="scan-btn" onclick="startScan()">
+                        <span class="scan-btn-text">Scan Now</span>
+                        <span class="scan-btn-loading" style="display:none">
+                            <span class="spinner"></span> Scanning...
+                        </span>
+                    </button>
+                </div>
+                <div class="scanner-hint">Free for public repositories • No login required</div>
+            </div>
+
+            <!-- Error Message -->
+            <div id="error-msg" class="error-msg" style="display:none"></div>
+        </div>
+
+        <!-- Floating elements -->
+        <div class="floating-cards">
+            <div class="floating-card card-1">🔑 Secret Detection</div>
+            <div class="floating-card card-2">📦 Dependency Scan</div>
+            <div class="floating-card card-3">🐳 Docker Security</div>
+            <div class="floating-card card-4">⚙️ Actions Audit</div>
+        </div>
+    </section>
+
+    <!-- Results Section (hidden initially) -->
+    <section class="results-section" id="results" style="display:none">
+        <div class="results-container">
+            <!-- Grade Circle -->
+            <div class="grade-display">
+                <div class="grade-circle" id="grade-circle">
+                    <span class="grade-letter" id="grade-letter">A</span>
+                    <span class="grade-score" id="grade-score">95/100</span>
+                </div>
+                <div class="grade-info">
+                    <h2 id="grade-label">Excellent Security</h2>
+                    <p id="grade-repo" class="grade-repo"></p>
+                </div>
+            </div>
+
+            <!-- Scanner Results Table -->
+            <div class="results-table-wrapper">
+                <table class="results-table">
+                    <thead>
+                        <tr>
+                            <th>Scanner</th>
+                            <th>Status</th>
+                            <th>Findings</th>
+                        </tr>
+                    </thead>
+                    <tbody id="results-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Detailed Findings -->
+            <div id="findings-detail" class="findings-detail"></div>
+
+            <!-- Scan Again -->
+            <button class="scan-again-btn" onclick="resetScan()">← Scan Another Repo</button>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <h2 class="section-title">What We Scan For</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🔑</div>
+                <h3>Secret Detection</h3>
+                <p>Finds leaked API keys, tokens, passwords, private keys, and database URLs in your code.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📦</div>
+                <h3>Dependency Vulnerabilities</h3>
+                <p>Checks package.json, requirements.txt, and more for known CVEs and unpinned versions.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚙️</div>
+                <h3>GitHub Actions Audit</h3>
+                <p>Detects unpinned actions, dangerous permissions, script injection, and supply chain risks.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🐳</div>
+                <h3>Dockerfile Security</h3>
+                <p>Flags running as root, unpinned base images, secrets in build args, and best practice violations.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📄</div>
+                <h3>Gitignore Coverage</h3>
+                <p>Ensures sensitive files like .env, private keys, and certificates are properly excluded.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>A-F Grade Report</h3>
+                <p>Get an instant security grade with actionable recommendations for every finding.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2>Want to run it locally?</h2>
+        <div class="cta-code">
+            <code>pip install shieldmyrepo && shieldmyrepo scan .</code>
+        </div>
+        <div class="cta-buttons">
+            <a href="https://github.com/DhanushNehru/ShieldMyRepo" target="_blank" class="btn btn-primary">⭐ Star on GitHub</a>
+            <a href="https://github.com/DhanushNehru/ShieldMyRepo/issues" target="_blank" class="btn btn-secondary">💡 Contribute</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with ❤️ by <a href="https://github.com/DhanushNehru" target="_blank">Dhanush Nehru</a></p>
+        <p class="footer-sub">Open source under the MIT License</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
