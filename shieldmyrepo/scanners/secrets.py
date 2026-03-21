@@ -75,6 +75,24 @@ SECRET_PATTERNS = [
         "severity": Severity.CRITICAL,
         "recommendation": "Revoke this Stripe key immediately. Use environment variables for payment keys.",
     },
+    {
+        "name": "Azure Storage Account Key",
+        "pattern": r"(?i)(DefaultEndpointsProtocol=https?|AccountKey)=[A-Za-z0-9+/=]{88}",
+        "severity": Severity.CRITICAL,
+        "recommendation": "Remove Azure storage account key and rotate it. Use Azure Key Vault or managed identities.",
+    },
+    {
+        "name": "Azure AD Client Secret",
+        "pattern": r"(?i)(azure[_-]?client[_-]?secret|client[_-]?secret)\s*[:=]\s*['\"][A-Za-z0-9_\-~.]{34}['\"]",
+        "severity": Severity.CRITICAL,
+        "recommendation": "Remove Azure AD client secret and rotate it. Use Azure Key Vault for secret management.",
+    },
+    {
+        "name": "Azure Connection String",
+        "pattern": r"DefaultEndpointsProtocol=https?;AccountName=[^;]+;AccountKey=[^;]+;EndpointSuffix=(core\.windows\.net|core\.chinacloudapi\.cn|core\.usgovcloudapi\.net)",
+        "severity": Severity.CRITICAL,
+        "recommendation": "Remove Azure connection string and rotate credentials. Use managed identities or Azure Key Vault.",
+    },
 ]
 
 # File extensions to skip
