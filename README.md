@@ -9,7 +9,6 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/DhanushNehru/ShieldMyRepo/stargazers"><img src="https://img.shields.io/github/stars/DhanushNehru/ShieldMyRepo?style=for-the-badge&color=gold" alt="Stars"></a>
   <a href="https://github.com/DhanushNehru/ShieldMyRepo/network/members"><img src="https://img.shields.io/github/forks/DhanushNehru/ShieldMyRepo?style=for-the-badge&color=blue" alt="Forks"></a>
   <a href="https://github.com/DhanushNehru/ShieldMyRepo/issues"><img src="https://img.shields.io/github/issues/DhanushNehru/ShieldMyRepo?style=for-the-badge&color=red" alt="Issues"></a>
   <a href="https://github.com/DhanushNehru/ShieldMyRepo/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DhanushNehru/ShieldMyRepo?style=for-the-badge" alt="License"></a>
