@@ -41,15 +41,15 @@ $ shieldmyrepo scan .
 
 📊 Overall Grade: B
 
-┌─────────────────────────┬────────┬──────────┐
-│ Scanner                 │ Status │ Findings │
-├─────────────────────────┼────────┼──────────┤
-│ 🔑 Secret Detection     │ ✅ PASS │ 0        │
-│ 📦 Dependencies         │ ⚠️ WARN │ 3        │
-│ ⚙️ GitHub Actions        │ ✅ PASS │ 0        │
-│ 🐳 Dockerfile           │ ❌ FAIL │ 2        │
-│ 📄 Gitignore             │ ⚠️ WARN │ 1        │
-└─────────────────────────┴────────┴──────────┘
+┌─────────────────────────┬───────────┬──────────┐
+│ Scanner                 │ Status    │ Findings │
+├─────────────────────────┼───────────┼──────────┤
+│ 🔑 Secret Detection     │ ✅ PASS   │ 0        │
+│ 📦 Dependencies         │ ⚠️ WARN   │ 3        │
+│ ⚙️ GitHub Actions       │ ✅ PASS   │ 0        │
+│ 🐳 Dockerfile           │ ❌ FAIL   │ 2        │
+│ 📄 Gitignore            │ ⚠️ WARN   │ 1        │
+└─────────────────────────┴───────────┴──────────┘
 
 📋 Details: reports/shieldmyrepo-report.json
 🏷️ Badge: reports/shieldmyrepo-badge.svg
