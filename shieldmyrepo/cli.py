@@ -41,7 +41,11 @@ def main():
     "--output", "output_dir", default="reports",
     help="Output directory for reports and badges"
 )
-def scan(path, badge, output_format, scanner_names, output_dir):
+@click.option(
+    "-v", "--verbose", is_flag=True,
+    help="Enable verbose output with detailed scanner information"
+)
+def scan(path, badge, output_format, scanner_names, output_dir, verbose):
     """Scan a repository for security issues.
 
     PATH is the path to the repository to scan.
@@ -67,10 +71,29 @@ def scan(path, badge, output_format, scanner_names, output_dir):
 
     # Run all scanners
     results = []
+    import time
+
     for scanner in scanners:
-        with console.status(f"Running [cyan]{scanner.name}[/cyan]..."):
+        if verbose:
+            console.print(f"  🔎 Running scanner: [cyan]{scanner.name}[/cyan]...")
+            start_time = time.time()
+
+        with console.status(f"Running [cyan]{scanner.name}[/cyan]..." if not verbose else None):
             result = scanner.run(repo_path)
             results.append(result)
+
+        if verbose:
+            elapsed = time.time() - start_time
+            console.print(f"  ✅ {scanner.name} completed in {elapsed:.2f}s")
+            console.print(f"     Files scanned: {len(result.get('files', []))}")
+            if result.get('issues'):
+                console.print(f"     Issues found: {len(result['issues'])}")
+            console.print()
+
+    if verbose:
+        console.print(f"  📊 Total files scanned: {sum(len(r.get('files', [])) for r in results)}")
+        console.print(f"  📋 Total scanners run: {len(results)}")
+        console.print()
 
     # Render report
     report_data = render_report(results, repo_path)
