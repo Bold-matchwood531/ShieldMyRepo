@@ -100,6 +100,7 @@ SKIP_EXTENSIONS = {
     ".png", ".jpg", ".jpeg", ".gif", ".ico", ".svg", ".woff", ".woff2",
     ".ttf", ".eot", ".mp3", ".mp4", ".zip", ".tar", ".gz", ".pdf",
     ".pyc", ".pyo", ".so", ".dylib", ".dll", ".exe", ".bin",
+    ".whl", ".egg", ".jar", ".class",
 }
 
 # Directories to skip
