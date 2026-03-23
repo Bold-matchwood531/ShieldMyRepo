@@ -6,7 +6,9 @@ Usage:
     shieldmyrepo list
 """
 
+import contextlib
 import os
+import time
 
 import click
 from rich.console import Console
@@ -71,27 +73,29 @@ def scan(path, badge, output_format, scanner_names, output_dir, verbose):
 
     # Run all scanners
     results = []
-    import time
 
     for scanner in scanners:
         if verbose:
             console.print(f"  🔎 Running scanner: [cyan]{scanner.name}[/cyan]...")
-            start_time = time.time()
+            start_time = time.perf_counter()
 
-        with console.status(f"Running [cyan]{scanner.name}[/cyan]..." if not verbose else None):
+        # Use nullcontext for verbose mode to avoid passing None to console.status
+        status_ctx = contextlib.nullcontext() if verbose else console.status(f"Running [cyan]{scanner.name}[/cyan]...")
+        
+        with status_ctx:
             result = scanner.run(repo_path)
             results.append(result)
 
         if verbose:
-            elapsed = time.time() - start_time
+            elapsed = time.perf_counter() - start_time
             console.print(f"  ✅ {scanner.name} completed in {elapsed:.2f}s")
-            console.print(f"     Files scanned: {len(result.get('files', []))}")
-            if result.get('issues'):
-                console.print(f"     Issues found: {len(result['issues'])}")
+            console.print(f"     Files scanned: {result.scanned_files_count}")
+            if result.findings:
+                console.print(f"     Issues found: {len(result.findings)}")
             console.print()
 
     if verbose:
-        console.print(f"  📊 Total files scanned: {sum(len(r.get('files', [])) for r in results)}")
+        console.print(f"  📊 Total files scanned: {sum(r.scanned_files_count for r in results)}")
         console.print(f"  📋 Total scanners run: {len(results)}")
         console.print()
 

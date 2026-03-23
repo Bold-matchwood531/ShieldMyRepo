@@ -21,6 +21,7 @@ class DockerfileScanner(ScannerBase):
 
     def scan(self, repo_path: str) -> List[Finding]:
         findings = []
+        self._scanned_files_count = 0
 
         for root, dirs, files in os.walk(repo_path):
             dirs[:] = [d for d in dirs if d not in {
@@ -31,6 +32,7 @@ class DockerfileScanner(ScannerBase):
                 if filename.lower() in ("dockerfile", "dockerfile.dev", "dockerfile.prod"):
                     filepath = os.path.join(root, filename)
                     rel_path = os.path.relpath(filepath, repo_path)
+                    self._scanned_files_count += 1
 
                     try:
                         with open(filepath, "r", encoding="utf-8") as f:
@@ -44,6 +46,7 @@ class DockerfileScanner(ScannerBase):
                 if filename.lower() in ("docker-compose.yml", "docker-compose.yaml", "compose.yml"):
                     filepath = os.path.join(root, filename)
                     rel_path = os.path.relpath(filepath, repo_path)
+                    self._scanned_files_count += 1
 
                     try:
                         with open(filepath, "r", encoding="utf-8") as f:

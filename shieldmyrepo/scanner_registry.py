@@ -53,6 +53,7 @@ class ScanResult:
     scanner_name: str
     scanner_description: str
     findings: List[Finding] = field(default_factory=list)
+    scanned_files_count: int = 0
 
     @property
     def passed(self) -> bool:
@@ -120,10 +121,13 @@ class ScannerBase(ABC):
         """
         try:
             findings = self.scan(repo_path)
+            # Get scanned files count if the scanner tracked it
+            scanned_files_count = getattr(self, '_scanned_files_count', 0)
             return ScanResult(
                 scanner_name=self.name,
                 scanner_description=self.description,
                 findings=findings,
+                scanned_files_count=scanned_files_count,
             )
         except Exception as e:
             return ScanResult(
