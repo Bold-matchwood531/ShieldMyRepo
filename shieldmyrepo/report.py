@@ -182,13 +182,13 @@ def save_report(report_data: dict, output_dir: str, fmt: str = "json") -> str:
 
     if fmt == "json":
         filepath = os.path.join(output_dir, "shieldmyrepo-report.json")
-        with open(filepath, "w") as f:
-            json.dump(report_data, f, indent=2)
+        with open(filepath, "w", encoding="utf-8") as f:
+            json.dump(report_data, f, indent=2, ensure_ascii=False)
         return filepath
     elif fmt == "markdown":
         filepath = os.path.join(output_dir, "shieldmyrepo-report.md")
         md_content = _generate_markdown_report(report_data)
-        with open(filepath, "w") as f:
+        with open(filepath, "w", encoding="utf-8") as f:
             f.write(md_content)
         return filepath
 
