@@ -123,3 +123,39 @@ def test_dependency_scanner_detects_unpinned(tmp_path):
     findings = scanner.scan(str(tmp_path))
 
     assert any("Unpinned" in f.message for f in findings)
+
+
+def test_secrets_scanner_tracks_scanned_files_count(tmp_path):
+    """Test that the secrets scanner tracks the number of scanned files."""
+    from shieldmyrepo.scanners.secrets import SecretScanner
+
+    # Create multiple files with different extensions
+    (tmp_path / "app.py").write_text('print("hello")\n')
+    (tmp_path / "config.py").write_text('secret = "mysecretvalue"\n')  # Matches Generic Secret pattern
+    (tmp_path / "main.py").write_text('import os\n')
+    (tmp_path / "image.png").write_bytes(b'\x89PNG\r\n\x1a\n')  # Binary file, should be skipped
+
+    scanner = SecretScanner()
+    findings = scanner.scan(str(tmp_path))
+
+    # Should have scanned 3 files (excluding the .png binary file)
+    assert scanner._scanned_files_count == 3
+    # Should have detected the secret in config.py
+    assert len(findings) >= 1
+
+
+def test_scanner_base_initializes_scanned_files_count(tmp_path):
+    """Test that ScannerBase initializes _scanned_files_count to 0."""
+    from shieldmyrepo.scanners.secrets import SecretScanner
+
+    scanner = SecretScanner()
+    
+    # Should be initialized to 0
+    assert hasattr(scanner, '_scanned_files_count')
+    assert scanner._scanned_files_count == 0
+    
+    # After scanning, should be updated
+    (tmp_path / "test.py").write_text('print("test")\n')
+    scanner.scan(str(tmp_path))
+    
+    assert scanner._scanned_files_count > 0

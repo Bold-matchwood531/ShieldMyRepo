@@ -102,6 +102,10 @@ class ScannerBase(ABC):
     name: str = "Base Scanner"
     description: str = "Base scanner class"
 
+    def __init__(self):
+        """Initialize scanner with default values."""
+        self._scanned_files_count = 0
+
     @abstractmethod
     def scan(self, repo_path: str) -> List[Finding]:
         """Scan the repository and return a list of findings.
