@@ -58,6 +58,7 @@ class DependencyScanner(ScannerBase):
 
     def scan(self, repo_path: str) -> List[Finding]:
         findings = []
+        self._scanned_files_count = 0
 
         for root, dirs, files in os.walk(repo_path):
             # Skip common non-project directories
@@ -71,6 +72,7 @@ class DependencyScanner(ScannerBase):
                     filepath = os.path.join(root, filename)
                     rel_path = os.path.relpath(filepath, repo_path)
                     ecosystem = DEPENDENCY_FILES[filename]
+                    self._scanned_files_count += 1
 
                     try:
                         with open(filepath, "r", encoding="utf-8") as f:

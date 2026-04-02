@@ -101,6 +101,7 @@ class GitignoreScanner(ScannerBase):
 
     def scan(self, repo_path: str) -> List[Finding]:
         findings = []
+        self._scanned_files_count = 0
 
         gitignore_path = os.path.join(repo_path, ".gitignore")
 
@@ -153,6 +154,7 @@ class GitignoreScanner(ScannerBase):
             }]
 
             for filename in files:
+                self._scanned_files_count += 1
                 matches = False
                 if filename == pattern["file"]:
                     matches = True

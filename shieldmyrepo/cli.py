@@ -6,7 +6,9 @@ Usage:
     shieldmyrepo list
 """
 
+import contextlib
 import os
+import time
 
 import click
 from rich.console import Console
@@ -30,7 +32,7 @@ def main():
 @click.argument("path", type=click.Path(exists=True))
 @click.option("--badge", is_flag=True, help="Generate an SVG badge")
 @click.option(
-    "--format", "output_format", type=click.Choice(["terminal", "json"]),
+    "--format", "output_format", type=click.Choice(["terminal", "json", "markdown"]),
     default="terminal", help="Output format"
 )
 @click.option(
@@ -41,7 +43,11 @@ def main():
     "--output", "output_dir", default="reports",
     help="Output directory for reports and badges"
 )
-def scan(path, badge, output_format, scanner_names, output_dir):
+@click.option(
+    "-v", "--verbose", is_flag=True,
+    help="Enable verbose output with detailed scanner information"
+)
+def scan(path, badge, output_format, scanner_names, output_dir, verbose):
     """Scan a repository for security issues.
 
     PATH is the path to the repository to scan.
@@ -67,17 +73,38 @@ def scan(path, badge, output_format, scanner_names, output_dir):
 
     # Run all scanners
     results = []
+
     for scanner in scanners:
-        with console.status(f"Running [cyan]{scanner.name}[/cyan]..."):
+        if verbose:
+            console.print(f"  🔎 Running scanner: [cyan]{scanner.name}[/cyan]...")
+            start_time = time.perf_counter()
+
+        # Use nullcontext for verbose mode to avoid passing None to console.status
+        status_ctx = contextlib.nullcontext() if verbose else console.status(f"Running [cyan]{scanner.name}[/cyan]...")
+        
+        with status_ctx:
             result = scanner.run(repo_path)
             results.append(result)
+
+        if verbose:
+            elapsed = time.perf_counter() - start_time
+            console.print(f"  ✅ {scanner.name} completed in {elapsed:.2f}s")
+            console.print(f"     Files scanned: {result.scanned_files_count}")
+            if result.findings:
+                console.print(f"     Issues found: {len(result.findings)}")
+            console.print()
+
+    if verbose:
+        console.print(f"  📊 Total files scanned: {sum(r.scanned_files_count for r in results)}")
+        console.print(f"  📋 Total scanners run: {len(results)}")
+        console.print()
 
     # Render report
     report_data = render_report(results, repo_path)
 
-    # Save report if JSON format
-    if output_format == "json":
-        filepath = save_report(report_data, output_dir)
+    # Save report if JSON or Markdown format
+    if output_format in ("json", "markdown"):
+        filepath = save_report(report_data, output_dir, fmt=output_format)
         console.print(f"📋 Report saved to [cyan]{filepath}[/cyan]")
 
     # Generate badge if requested
