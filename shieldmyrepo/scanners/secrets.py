@@ -74,12 +74,14 @@ SECRET_PATTERNS = [
     {
         "name": "Google / Firebase API Key",
         "pattern": r"AIza[0-9A-Za-z\-_]{35}",
+        "compiled": re.compile(r"AIza[0-9A-Za-z\-_]{35}"),
         "severity": Severity.CRITICAL,
         "recommendation": "Revoke the Google or Firebase API key immediately. Restrict the key to specific IPs or referrers.",
     },
     {
         "name": "GCP Service Account Key Info",
         "pattern": r"(?i)(\"type\":\s*\"service_account\"|\"private_key_id\":\s*\"[a-f0-9]{40}\")",
+        "compiled": re.compile(r"(?i)(\"type\":\s*\"service_account\"|\"private_key_id\":\s*\"[a-f0-9]{40}\")"),
         "severity": Severity.HIGH,
         "recommendation": "Service Account JSON properties detected. Ensure private keys are never committed.",
     },
