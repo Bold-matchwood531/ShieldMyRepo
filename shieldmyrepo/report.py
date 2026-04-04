@@ -111,6 +111,13 @@ def render_report(results: List[ScanResult], repo_path: str) -> dict:
 
     # Detailed findings
     for result in results:
+        if not result.findings:
+            console.print()
+            console.print(
+                f"[bold]{result.scanner_name}[/bold] — [green]✅ No vulnerabilities detected[/green]"
+            )
+            continue
+
         if result.findings:
             console.print()
             console.print(f"[bold]{result.scanner_name}[/bold] — Findings:", style="white")
@@ -222,6 +229,9 @@ def _generate_markdown_report(report_data: dict) -> str:
 
     # Detailed findings
     for scanner in report_data['scanners']:
+        if not scanner['findings']:
+            lines.append(f"\n### {scanner['name']} — ✅ No vulnerabilities detected\n")
+            continue
         if scanner['findings']:
             lines.append(f"\n### 🔑 {scanner['name']} — Findings\n")
             for i, finding in enumerate(scanner['findings'], 1):
